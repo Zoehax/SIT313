@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1" />
+  <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/txtCity"
+              android:gravity="center" 
+              android:layout_marginTop="40dp"
+              android:text=""
+              android:textSize="36sp"
+              android:textStyle="bold" />
+ 
+  <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/txtLastUpdate"
+             android:gravity="center"
+             android:text=""
+             android:textSize="18sp"
+             android:textStyle="bold" />
+  
+  <ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:id="@+id/imageView"
+    />
+
+  <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/txtDescription"
+             android:gravity="center"
+             android:text=""
+             android:textSize="30sp"
+             android:textStyle="bold" />
+
+  <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/txtHumidity"
+             android:gravity="center"
+             android:text=""
+             android:textSize="30sp"
+             android:textStyle="bold" />
+
+  <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/txtTime"
+             android:gravity="center"
+             android:text=""
+             android:textSize="30sp"
+             android:textStyle="bold" />
+
+  <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/txtCelsius"
+             android:gravity="center"
+             android:text=""
+             android:textSize="80sp"
+             android:textStyle="bold" />
+
+</RelativeLayout>
