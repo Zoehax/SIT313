@@ -1,0 +1,26 @@
+ public class CalenderPage : ContentPage
+    {
+        CalenderView _calenderView;
+        StackLayout _stacker;
+
+        public CalenderPage()
+        {
+            Title = "Smart Calender";
+
+            _stacker = new StackLayout();
+            ContentPage = _stacker;
+
+            _calenderView = new CalenderView();
+            {
+                VerticalOptions= LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+            _stacker.Childern.Add(_calenderView);
+            _calenderView.DataSelected += (object sender, DateTime e) => {
+                _stacker.Children.Add(new Label() {
+                    Text = "Data Was Secleted" + e.ToString("d"),
+                    VerticalOptions = LayoutOptions.Start,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                }
+                    )};
+        }
