@@ -29,7 +29,7 @@ namespace Weather_APP.Helper
                 {
                     if (urlConnection.ResponseCode == HttpStatus.Ok)
                     {
-                        BufferedReader r = new BufferedReader(new InputStream(urlConnection.InputStream));
+                        BufferedReader r = new BufferedReader(new InputStreamReader(urlConnection.InputStream));
                         StringBuilder sb = new StringBuilder();
 
                         String line;
