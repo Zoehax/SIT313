@@ -2,13 +2,24 @@
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
-using Android.Content;
+using Android.Views;
+using Android.Media;
+using Android.Graphics;
+using Android.Runtime;
+using Android.Util;
+using System;
 
-namespace Calendar_1
+namespace SurferVideo
 {
-    [Activity(Label = "217196947", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@style/FullScreenTheme", MainLauncher = true)]
+    public class MainActivity : AppCompatActivity,ISurfaceHolderCallback,MediaPlayer.IOnPreparedListener
+        
     {
+        private SurfaceView surfaceView;
+        private ISurfaceHolder surfaceHolder;
+        private MediaPlayer mediaPlayer;
+        private const string VIDEO_PATH = "https://www.youtube.com/watch?v=78FxAsiXvJM";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -16,28 +27,61 @@ namespace Calendar_1
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            var calendarView = FindViewById<CalendarView>(Resource.Id.calendarView);
-            var txtDisplay = FindViewById<TextView>(Resource.Id.txtDisplay);
+            surfaceView = FindViewById<SurfaceView>(Resource.Id.surfaceView);
+            surfaceHolder = surfaceView.Holder;
+            surfaceHolder.AddCallback(this);
+        }
 
-            txtDisplay.Text = "Date: ";
-
-            calendarView.DateChange += (s, e) =>
-            {
-                int day = e.DayOfMonth;
-                int month = e.Month;
-                int year = e.Year;
-                txtDisplay.Text = "Date: " + day + " / " + month + " / " + year;
-
-            };
-
-            var btnJump = FindViewById<Button>(Resource.Id.btnJump);
-            btnJump.Click += (s, e) =>
-            {
-                Intent nextActity_0 = new Intent(this, typeof(Activity_mid));
-                StartActivity(nextActity_0);
-            };
-
+        public void SurfaceChanged(ISurfaceHolder holder, [GeneratedEnum] Format format, int width, int height)
+        {
             
+        }
+
+        public void SurfaceCreated(ISurfaceHolder holder)
+        {
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.SetDisplay(surfaceHolder);
+                try
+                {
+                    mediaPlayer.SetDataSource(VIDEO_PATH);
+                    mediaPlayer.Prepare();
+                    mediaPlayer.SetOnPreparedListener(this);
+                    mediaPlayer.SetAudioStreamType(Stream.Music);
+                }
+                catch (Exception ex) {
+                Log.Error("ERROR", ex.Message);
+                }
+            
+        }
+
+        public void SurfaceDestroyed(ISurfaceHolder holder)
+        {
+            
+        }
+
+        public void OnPrepared(MediaPlayer mp)
+        {
+            mediaPlayer.Start();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            ReleaseMediaPlayer();
+        }
+
+        private void ReleaseMediaPlayer()
+        {
+            if (mediaPlayer != null) {
+                mediaPlayer.Release();
+                mediaPlayer = null;
+            }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ReleaseMediaPlayer();
         }
     }
 }
